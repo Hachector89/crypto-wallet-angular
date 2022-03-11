@@ -1,0 +1,50 @@
+<mat-drawer-container fullscreen>
+
+    <mat-card>
+        <mat-card-content>
+            <form #loginForm="ngForm">
+                <div id="center">
+                    <mat-icon aria-hidden="true" color="accent">
+                        face
+                    </mat-icon>
+                    <h1>Login</h1>
+                </div>
+                
+
+                <mat-form-field>
+                    <input matInput placeholder="Enter your email" [formControl]="email" name="email" required>
+                    <mat-error *ngIf="email.invalid">
+                        {{getErrorMessage('email')}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Enter your password" [formControl]="password" name="password" required>
+                    <mat-error *ngIf="password.invalid">
+                        {{getErrorMessage('password')}}
+                    </mat-error>
+                </mat-form-field>
+                
+                
+                <div id="center">
+                    <button mat-raised-button 
+                        type="button"
+                        color="primary"
+                        (click)="login()">
+                            Login
+                    </button>
+
+                    <button mat-raised-button 
+                        type="button"
+                        color="warn"
+                        (click)="register()">
+                            Create Account
+                    </button>
+                </div>
+
+                
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+</mat-drawer-container>

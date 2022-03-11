@@ -1,0 +1,104 @@
+<mat-drawer-container fullscreen>
+
+    <mat-card>
+        <div id="center">
+            <mat-icon aria-hidden="true" color="accent">
+                trending_up
+            </mat-icon>
+            <h1>Buy & Sell</h1>
+        </div>
+
+        <hr>
+
+        <mat-card-content>
+            <mat-list id="table">
+                <table [dataSource]="ELEMENT_DATA" mat-table class="mat-elevation-z8">
+
+                    <!-- base Column -->
+                    <ng-container matColumnDef="base">
+                        <th mat-header-cell *matHeaderCellDef> Base </th>
+                        <td mat-cell *matCellDef="let element"> {{element.base}} </td>
+                    </ng-container>
+
+                    <!-- currency Column -->
+                    <ng-container matColumnDef="currency">
+                        <th mat-header-cell *matHeaderCellDef> Currency </th>
+                        <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
+                    </ng-container>
+
+                    <!-- amount Column -->
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef> Amount </th>
+                        <td mat-cell *matCellDef="let element"> {{element.amount | number:'1.0-6' }} </td>
+                    </ng-container>
+
+                    <!-- parity Column -->
+                    <ng-container matColumnDef="parity">
+                        <th mat-header-cell *matHeaderCellDef> My BTC Wallet </th>
+                        <td mat-cell *matCellDef="let element"> {{element.pairing | number:'1.0-6' }} €</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-list>
+        </mat-card-content>
+
+        <hr>
+
+        <!-- With more than one, I would use ngFor. For this case, this is fine.-->
+
+        <mat-card-content>
+            <mat-list>
+                <mat-form-field>
+                    <span><strong>FIAT Currency:</strong></span>
+                    <input matInput value=" {{ user.fiatCurrency }} €" name="myFiatCurrency" readonly>
+                </mat-form-field>
+                <mat-form-field>
+                    <span><strong>Buying Crypto Currency (in €):</strong></span>
+                    <input matInput [formControl]="fiatCurrency" name="fiatCurrency">
+                    <mat-error *ngIf="fiatCurrency.invalid">
+                        {{getErrorMessage('fiatCurrency')}}
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button type="button" color="accent" (click)="buyCrypto()">
+                    Buy BTC
+                </button>
+            </mat-list>
+        </mat-card-content>
+
+        <hr>
+
+        <mat-card-content>
+            <mat-list>
+                <mat-form-field>
+                    <span><strong>Crypto Currency:</strong></span>
+                    <input matInput value=" {{ user.cryptoCurrency }} BTC" name="myCryptoCurrency" readonly>
+                </mat-form-field>
+                <mat-form-field>
+                    <span><strong>Selling Crypto Currency (in BTC):</strong></span>
+                    <input matInput [formControl]="cryptoCurrency" name="cryptoCurrency">
+                    <mat-error *ngIf="cryptoCurrency.invalid">
+                        {{getErrorMessage('cryptoCurrency')}}
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button type="button" color="accent" (click)="sellCrypto()">
+                    Sell BTC
+                </button>
+            </mat-list>
+        </mat-card-content>
+
+        <hr>
+
+        <div id="center">
+            <button mat-raised-button type="button" color="primary" (click)="dashboard()">
+                Back to Dashboard
+            </button>
+
+            <button mat-raised-button type="button" color="warn" (click)="logout()">
+                Logout
+            </button>
+        </div>
+
+    </mat-card>
+</mat-drawer-container>

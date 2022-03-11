@@ -1,0 +1,65 @@
+<mat-drawer-container fullscreen>
+
+    <mat-card>
+        <mat-card-content>
+            <form #loginForm="ngForm">
+                <div id="center">
+                    <mat-icon aria-hidden="true" color="accent">
+                        face
+                    </mat-icon>
+                    <h1>Create Account</h1>
+                </div>
+                
+
+                
+                <mat-form-field>
+                    <input matInput placeholder="Enter your name" [formControl]="username" name="username" required>
+                    <mat-error *ngIf="username.invalid">
+                        {{getErrorMessage('username')}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Enter your email" [formControl]="email" name="email" required>
+                    <mat-error *ngIf="email.invalid">
+                        {{getErrorMessage('email')}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Enter your password" [formControl]="password" name="password" required>
+                    <mat-error *ngIf="password.invalid">
+                        {{getErrorMessage('password')}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Enter your FIAT currency" [formControl]="fiatCurrency" name="fiatCurrency" required>
+                    <mat-error *ngIf="fiatCurrency.invalid">
+                        {{getErrorMessage('fiatCurrency')}}
+                    </mat-error>
+                </mat-form-field>
+                
+                
+                <div id="center">
+                    <button mat-raised-button 
+                        type="button"
+                        color="primary"
+                        (click)="register()">
+                            Create Account
+                    </button>
+
+                    <button mat-raised-button 
+                        type="button"
+                        color="warn"
+                        (click)="login()">
+                            Sign in
+                    </button>
+                </div>
+
+                
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+</mat-drawer-container>
